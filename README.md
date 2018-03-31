@@ -25,7 +25,8 @@ usage: maven-to-plantuml
 
 ## Example
 
-The [example project](example/), run with `--input dep.txt --output dep.puml --exclude example` produces [this PlantUML file](doc/example.puml) and is rendered to this graph:
+The graph of the [example project](example/), run with `--input dep.txt --output dep.puml --exclude example` produces 
+[this PlantUML file](doc/example.puml) and is rendered to this graph:
 
 ![](/doc/example.png)
 
