@@ -1,0 +1,53 @@
+[INFO] Scanning for projects...
+[INFO] [1m------------------------------------------------------------------------[m
+[INFO] [1mReactor Build Order:[m
+[INFO] 
+[INFO] example
+[INFO] c
+[INFO] b
+[INFO] a
+[INFO] 
+[INFO] [1m------------------------------------------------------------------------[m
+[INFO] [1mBuilding example 1.0-SNAPSHOT[m
+[INFO] [1m------------------------------------------------------------------------[m
+[INFO] 
+[INFO] [1m--- [0;32mmaven-dependency-plugin:2.8:tree[m [1m(default-cli)[m @ [36mexample[0;1m ---[m
+[INFO] example:example:pom:1.0-SNAPSHOT
+[INFO] 
+[INFO] [1m------------------------------------------------------------------------[m
+[INFO] [1mBuilding c 1.0-SNAPSHOT[m
+[INFO] [1m------------------------------------------------------------------------[m
+[INFO] 
+[INFO] [1m--- [0;32mmaven-dependency-plugin:2.8:tree[m [1m(default-cli)[m @ [36mc[0;1m ---[m
+[INFO] example:c:jar:1.0-SNAPSHOT
+[INFO] 
+[INFO] [1m------------------------------------------------------------------------[m
+[INFO] [1mBuilding b 1.0-SNAPSHOT[m
+[INFO] [1m------------------------------------------------------------------------[m
+[INFO] 
+[INFO] [1m--- [0;32mmaven-dependency-plugin:2.8:tree[m [1m(default-cli)[m @ [36mb[0;1m ---[m
+[INFO] example:b:jar:1.0-SNAPSHOT
+[INFO] \- example:c:jar:1.0-SNAPSHOT:compile
+[INFO] 
+[INFO] [1m------------------------------------------------------------------------[m
+[INFO] [1mBuilding a 1.0-SNAPSHOT[m
+[INFO] [1m------------------------------------------------------------------------[m
+[INFO] 
+[INFO] [1m--- [0;32mmaven-dependency-plugin:2.8:tree[m [1m(default-cli)[m @ [36ma[0;1m ---[m
+[INFO] example:a:jar:1.0-SNAPSHOT
+[INFO] +- example:b:jar:1.0-SNAPSHOT:compile
+[INFO] \- example:c:jar:1.0-SNAPSHOT:compile
+[INFO] [1m------------------------------------------------------------------------[m
+[INFO] [1mReactor Summary:[m
+[INFO] 
+[INFO] example ............................................ [1;32mSUCCESS[m [  0.696 s]
+[INFO] c .................................................. [1;32mSUCCESS[m [  0.029 s]
+[INFO] b .................................................. [1;32mSUCCESS[m [  0.013 s]
+[INFO] a .................................................. [1;32mSUCCESS[m [  0.007 s]
+[INFO] [1m------------------------------------------------------------------------[m
+[INFO] [1;32mBUILD SUCCESS[m
+[INFO] [1m------------------------------------------------------------------------[m
+[INFO] Total time: 1.050 s
+[INFO] Finished at: 2018-03-31T13:43:43+02:00
+[INFO] Final Memory: 12M/147M
+[INFO] [1m------------------------------------------------------------------------[m

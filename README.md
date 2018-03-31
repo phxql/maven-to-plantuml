@@ -23,6 +23,12 @@ usage: maven-to-plantuml
  -o,--output <arg>     Output file
 ```
 
+## Example
+
+The [example project](example/), run with `--input dep.txt --output dep.puml --exclude example` produces [this PlantUML file](doc/example.puml) and is rendered to this graph:
+
+![](/doc/example.png)
+
 ## Building
 
 Run `./mvnw clean package` and check the `target` folder.
