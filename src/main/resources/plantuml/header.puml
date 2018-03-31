@@ -1,0 +1,13 @@
+@startuml
+' Only greyscale
+skinparam monochrome true
+' Display UML icons (-, +, ~, #) instead of visibility icons
+skinparam classAttributeIconSize 0
+' Disable class / interface / ... icons
+hide circles
+' Hide empty boxes
+hide empty members
+' Display packages as frame
+skinparam packageStyle frame
+' Disable shadows
+skinparam shadowing false
