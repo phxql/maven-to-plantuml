@@ -23,7 +23,7 @@ object PlantUmlOutputWriter : OutputWriter {
 
             val dependencies = module.findModuleDependencies(project.modules - settings.excludeModules, true)
             for (dependency in dependencies) {
-                it.write("\"${module.artifact}\" --> \"${dependency.artifact}\"")
+                it.write("\"${module.artifact}\" ..> \"${dependency.artifact}\"")
                 it.newLine()
             }
         }
