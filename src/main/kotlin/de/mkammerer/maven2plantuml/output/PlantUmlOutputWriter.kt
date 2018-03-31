@@ -4,7 +4,7 @@ import de.mkammerer.maven2plantuml.model.Project
 import java.io.OutputStream
 
 object PlantUmlOutputWriter : OutputWriter {
-    override fun write(project: Project, outputStream: OutputStream) {
+    override fun write(project: Project, settings: Settings, outputStream: OutputStream) {
         outputStream.bufferedWriter().use {
             readHeader().forEach { line ->
                 it.write(line)
@@ -13,6 +13,8 @@ object PlantUmlOutputWriter : OutputWriter {
 
 
             for (module in project.modules) {
+                if (settings.excludeModules.contains(module)) continue
+
                 it.write("class \"${module.artifact}\"")
                 it.newLine()
             }
@@ -20,6 +22,7 @@ object PlantUmlOutputWriter : OutputWriter {
             it.newLine()
 
             for (module in project.modules) {
+                if (settings.excludeModules.contains(module)) continue
 
                 val dependencies = module.findModuleDependencies(project.modules, true)
                 for (dependency in dependencies) {

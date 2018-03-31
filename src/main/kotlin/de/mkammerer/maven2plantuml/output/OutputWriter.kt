@@ -4,5 +4,5 @@ import de.mkammerer.maven2plantuml.model.Project
 import java.io.OutputStream
 
 interface OutputWriter {
-    fun write(project: Project, outputStream: OutputStream)
+    fun write(project: Project, settings: Settings, outputStream: OutputStream)
 }

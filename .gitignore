@@ -6,5 +6,4 @@
 target/
 
 # Test data
-test-dep.txt
-test-dep.puml
+test-dep.*
