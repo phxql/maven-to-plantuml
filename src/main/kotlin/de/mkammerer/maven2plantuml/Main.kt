@@ -3,6 +3,7 @@ package de.mkammerer.maven2plantuml
 import de.mkammerer.maven2plantuml.input.InputParser
 import de.mkammerer.maven2plantuml.input.MavenInputParser
 import de.mkammerer.maven2plantuml.model.Project
+import de.mkammerer.maven2plantuml.output.ConsoleOutputWriter
 import de.mkammerer.maven2plantuml.output.OutputWriter
 import de.mkammerer.maven2plantuml.output.PlantUmlOutputWriter
 import de.mkammerer.maven2plantuml.output.Settings
@@ -30,6 +31,7 @@ private fun doRun(args: Array<String>) {
     options.addOption("i", "input", true, "Input file")
     options.addOption("o", "output", true, "Output file")
     options.addOption("e", "exclude", true, "Artifact names of modules to exclude. Separated by comma.")
+    options.addOption(null, "console-output", false, "Instead of generating a PlantUML file, print the dependency graph to the console")
 
     val parser = DefaultParser()
     val cli = parser.parse(options, args)
@@ -42,7 +44,7 @@ private fun doRun(args: Array<String>) {
     val excludedModules = (cli.getOptionValue("exclude") ?: "").split(',').map { it.trim() }.toSet()
 
     val inputParser: InputParser = MavenInputParser
-    val outputWriter: OutputWriter = PlantUmlOutputWriter
+    val outputWriter: OutputWriter = if (cli.hasOption("console-output")) ConsoleOutputWriter else PlantUmlOutputWriter
 
     val inputFile = Paths.get(cli.getOptionValue("input")).toAbsolutePath()
     logger.info("Using input file {}", inputFile)

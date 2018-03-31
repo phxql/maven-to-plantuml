@@ -9,13 +9,17 @@ This small tool converts the output from `mvn dependency:tree` into a PlantUML d
 3. Run `plantuml dep.puml`. This will render the PlantUML diagram to a PNG file.
 4. View the file `dep.png`.
 
+### Advanced
+
 ```
 usage: maven-to-plantuml
- -e,--exclude <arg>   Artifact names of modules to exclude. Separated by
-                      comma.
-    --help            Prints this help
- -i,--input <arg>     Input file
- -o,--output <arg>    Output file
+    --console-output   Instead of generating a PlantUML file, print the
+                       dependency graph to the console
+ -e,--exclude <arg>    Artifact names of modules to exclude. Separated by
+                       comma.
+    --help             Prints this help
+ -i,--input <arg>      Input file
+ -o,--output <arg>     Output file
 ```
 
 ## Building
