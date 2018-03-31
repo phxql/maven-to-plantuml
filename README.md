@@ -2,7 +2,7 @@
 
 This small tool converts the output from `mvn dependency:tree` into a PlantUML diagram.
 In constrast to other graph plugins, this tool ignores external dependencies and is
-intended to plt a graph between the modules of the project. 
+intended to plot a graph between the modules of the project. 
 
 ## Usage
 
