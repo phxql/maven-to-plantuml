@@ -5,6 +5,9 @@ data class Module(
         val artifact: String,
         val dependencies: Set<Dependency> = emptySet()
 ) {
+    /**
+     * Finds all dependencies which are a dependency to one of the [modules].
+     */
     fun findModuleDependencies(modules: Set<Module>, onlyDirect: Boolean = false): Set<Dependency> {
         return dependencies.filter { dependency ->
             if (onlyDirect && dependency.transitive) false

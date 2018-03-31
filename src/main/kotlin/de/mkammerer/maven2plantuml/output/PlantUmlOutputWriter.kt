@@ -1,50 +1,64 @@
 package de.mkammerer.maven2plantuml.output
 
 import de.mkammerer.maven2plantuml.model.Project
+import java.io.BufferedWriter
 import java.io.OutputStream
 
 object PlantUmlOutputWriter : OutputWriter {
     override fun write(project: Project, settings: Settings, outputStream: OutputStream) {
         outputStream.bufferedWriter().use {
-            readHeader().forEach { line ->
-                it.write(line)
-                it.newLine()
-            }
+            writeHeader(it)
 
-
-            for (module in project.modules) {
-                if (settings.excludeModules.contains(module)) continue
-
-                it.write("class \"${module.artifact}\"")
-                it.newLine()
-            }
-
+            writeClassCommands(project, settings, it)
             it.newLine()
+            writeModuleDependencies(project, settings, it)
 
-            for (module in project.modules) {
-                if (settings.excludeModules.contains(module)) continue
+            writeFooter(it)
+        }
+    }
 
-                val dependencies = module.findModuleDependencies(project.modules, true)
-                for (dependency in dependencies) {
-                    it.write("\"${module.artifact}\" --> \"${dependency.artifact}\"")
-                    it.newLine()
-                }
-            }
+    private fun writeModuleDependencies(project: Project, settings: Settings, it: BufferedWriter) {
+        for (module in project.modules) {
+            if (settings.excludeModules.contains(module)) continue
 
-            readFooter().forEach { line ->
-                it.write(line)
+            val dependencies = module.findModuleDependencies(project.modules - settings.excludeModules, true)
+            for (dependency in dependencies) {
+                it.write("\"${module.artifact}\" --> \"${dependency.artifact}\"")
                 it.newLine()
             }
         }
     }
 
-    private fun readHeader(): List<String> {
+    private fun writeClassCommands(project: Project, settings: Settings, it: BufferedWriter) {
+        for (module in project.modules) {
+            if (settings.excludeModules.contains(module)) continue
+
+            it.write("class \"${module.artifact}\"")
+            it.newLine()
+        }
+    }
+
+    private fun writeFooter(it: BufferedWriter) {
+        readFooterFromResources().forEach { line ->
+            it.write(line)
+            it.newLine()
+        }
+    }
+
+    private fun writeHeader(it: BufferedWriter) {
+        readHeaderFromResources().forEach { line ->
+            it.write(line)
+            it.newLine()
+        }
+    }
+
+    private fun readHeaderFromResources(): List<String> {
         return javaClass.getResourceAsStream("/plantuml/header.puml").reader().use {
             it.readLines()
         }
     }
 
-    private fun readFooter(): List<String> {
+    private fun readFooterFromResources(): List<String> {
         return javaClass.getResourceAsStream("/plantuml/footer.puml").reader().use {
             it.readLines()
         }

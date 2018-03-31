@@ -9,9 +9,9 @@ object ConsoleOutputWriter : OutputWriter {
             if (settings.excludeModules.contains(module)) continue
 
             println("Module $module")
-            val directModuleDependencies = module.findModuleDependencies(project.modules, true)
+            val directModuleDependencies = module.findModuleDependencies(project.modules - settings.excludeModules, true)
             for (dependency in directModuleDependencies) {
-                println("+- $dependency")
+                println("  $dependency")
             }
         }
     }

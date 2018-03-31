@@ -19,15 +19,21 @@ object MavenInputParser : InputParser {
             for (line in lines) {
                 val module = parseModuleLine(line)
                 if (module != null) {
+                    // We found a module, so lets add the current module (if any) to the list of modules
+                    // The modules dependencies are the dependencies we accumulated to far
+                    // Then we reset the list of dependencies
                     currentModule?.let {
                         modules.add(it.copy(dependencies = currentModuleDependencies))
                         currentModuleDependencies = mutableSetOf()
                     }
 
+                    // The new current module is the module we just found
                     currentModule = module
                 } else {
                     val dependency = parseDependencyLine(line)
                     if (dependency != null) {
+                        // We found a dependency. If we have no current module, something is wrong. Otherwise
+                        // we just add the dependency to the dependency list
                         if (currentModule == null) throw IllegalStateException("Dependency without module found")
                         currentModuleDependencies.add(dependency)
                     }
@@ -35,16 +41,17 @@ object MavenInputParser : InputParser {
             }
         }
 
+        // Maybe we have a remaining module. Do the same steps we would do if we had found a new module
         currentModule?.let {
             modules.add(it.copy(dependencies = currentModuleDependencies))
-            currentModuleDependencies = mutableSetOf()
-            currentModule = null
         }
 
         return Project(modules)
     }
 
+    // Matches a valid Maven identifier
     private const val identifier = """[a-zA-Z_0-9.\-]+"""
+
     // [INFO] group:artifact:type:version
     private val modulePattern = """\[INFO] ($identifier):($identifier):($identifier):($identifier)""".toRegex()
     // [INFO] +- group:artifact:type:version:scope
