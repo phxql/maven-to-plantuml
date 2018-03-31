@@ -1,8 +1,7 @@
 # Maven to PlantUML
 
-This small tool converts the output from `mvn dependency:tree` into a PlantUML diagram.
-In constrast to other graph plugins, this tool ignores external dependencies and is
-intended to plot a graph between the modules of the project. 
+This small tool is intended to plot a graph to show the dependencies between Maven modules.
+It ignores external dependencies and shows only inter-module relationships.
 
 ## Usage
 
