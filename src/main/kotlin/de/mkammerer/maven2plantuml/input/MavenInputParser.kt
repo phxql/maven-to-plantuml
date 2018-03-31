@@ -55,7 +55,8 @@ object MavenInputParser : InputParser {
     // [INFO] group:artifact:type:version
     private val modulePattern = """\[INFO] ($identifier):($identifier):($identifier):($identifier)""".toRegex()
     // [INFO] +- group:artifact:type:version:scope
-    private val directDependencyPattern = """\[INFO] \+- ($identifier):($identifier):($identifier):($identifier):($identifier)""".toRegex()
+    // [INFO] \- group:artifact:type:version:scope
+    private val directDependencyPattern = """\[INFO] [+\\]- ($identifier):($identifier):($identifier):($identifier):($identifier)""".toRegex()
     // [INFO] |  +- group:artifact:type:version:scope
     private val transitiveDependencyPattern = """\[INFO] \|.*?($identifier):($identifier):($identifier):($identifier):($identifier)""".toRegex()
 

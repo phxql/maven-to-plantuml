@@ -43,6 +43,7 @@ object PlantUmlOutputWriter : OutputWriter {
             it.write(line)
             it.newLine()
         }
+        it.newLine()
     }
 
     private fun writeHeader(it: BufferedWriter) {
@@ -50,6 +51,7 @@ object PlantUmlOutputWriter : OutputWriter {
             it.write(line)
             it.newLine()
         }
+        it.newLine()
     }
 
     private fun readHeaderFromResources(): List<String> {
