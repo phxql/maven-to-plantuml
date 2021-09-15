@@ -1,12 +1,15 @@
 # Maven to PlantUML
 
-This small tool is intended to plot a graph to show the dependencies between Maven modules.
-It ignores external dependencies and shows only inter-module relationships.
+This small tool is intended to plot a graph to show the dependencies between Maven modules. It ignores external dependencies and shows only inter-module relationships.
+
+## Download
+
+Check the [releases page](https://github.com/phxql/maven-to-plantuml/releases).
 
 ## Usage
 
 1. Run `mvn dependency:tree > dep.txt` in your project. This generates the dependency tree which is used in the next step.
-2. Run `maven-to-plantuml --input dep.txt --output dep.puml`. This transforms the dependency tree output to a PlantUML diagram.
+2. Run `java -jar maven-to-plantuml.jar --input dep.txt --output dep.puml`. This transforms the dependency tree output to a PlantUML diagram.
 3. Run `plantuml dep.puml`. This will render the PlantUML diagram to a PNG file.
 4. View the file `dep.png`.
 
